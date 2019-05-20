@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <link href="styles.css" rel="stylesheet" />
+    <title>AAA</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+</head>
+<style>
+
+
+.main{
+    width: 80%;
+    background-color: white;
+  
+  }
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
+    pointer-events: none;
+  }
+  .suben
+  {
+    margin-top: 10px;
+    background-color: #bbb;
+   padding: .5em;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+   border-radius: 6px;
+   color: #fff;
+   font-family: 'Oswald';
+   font-size: 20px;
+   text-decoration: none;
+   border: none;
+  }
+  
+  .formen
+  {
+    margin-left: 30px;
+  }
+  .header
+  {
+    height:100px;
+    background-color: slategray;
+    width:1600px;
+  }
+
+</style>
+  <body>
+
+        <div class='main'>
+                <div class='header'></div>
+                <div class='entry'>
+                
+                
+                <h3>Entry</h3>
+                  <label>First Name</label><br/>
+                  <input  id ="fn" type='text' name="fn"></input><br/>
+                  
+                  <label>Last Name</label><br/>
+                  <input id ="ln" type='text' name="ln"></input><br/>
+                  
+                  <label>Cnic</label><br/>
+                  <input id ="cnn" type='text'   name="cnic"></input><br/>
+          
+                 <Button id ="btnn" class="suben" value='Submit' type="submit">Click me</Button>
+          
+                <h1>__________________</h1>
+                </div>
+               
+
+
+                
+                        <h3>Exit</h3>
+                           <label>Cnic</label><br/>
+                          <input id="delcnic" type='text' name="cnicDel"></input><br/>
+                  
+                         <Button id="delbtn" class="suben" value='Submit' type="submit">Delete</Button>
+                  
+  
+          
+              </div>
+
+              <script >
+              
+              
+const socket = io.connect('http://localhost:3000');
+
+const fn=document.getElementById('fn');
+
+const ln=document.getElementById('ln');
+
+const cnic=document.getElementById('cnn');
+
+const btn=document.getElementById('btnn');
+
+const delcn=document.getElementById('delcnic');
+
+const delbtn=document.getElementById('delbtn');
+
+
+btn.addEventListener('click',()=>{
+    socket.emit('entry',{
+        fn: fn.value,
+        ln:ln.value,
+        cnic:cnn.value
+    });
+});
+
+delbtn.addEventListener('click',()=>{
+    socket.emit('exit',{
+        cnic:delcn.value
+    });
+});
+
+
+              
+              </script>
+
+            </body>
+</html>

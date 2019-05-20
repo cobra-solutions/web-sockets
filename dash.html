@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+             .header
+  {
+    height:100px;
+    background-color: slategray;
+    width:1600px;
+  }</style>
+        <meta charset="utf-8">
+        <title>WebScockets 101</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
+       
+      <link href="styles.css" rel="stylesheet" /></head>
+    <body>
+
+            <div class='header'></div>
+
+        <div id ="entry"> </div>
+
+        <script  >
+        
+    const socket = io.connect('http://localhost:3000');
+    const entries=document.getElementById('entry');
+    
+    const exx=document.getElementById('exit');
+    
+    let name=[];
+    let cnic=[];
+    socket.on('show',(data)=>
+    {
+       
+        name.push(data.fn);
+        cnic.push(data.cnic);
+    
+    for(let i=0 ;i<name.length;i++)
+    {
+        if(i==0){ entries.innerHTML = '<p><strong>' + name[i] + ': </strong>'+ cnic[i]+ '</p>';}else{
+        entries.innerHTML += '<p><strong>' + name[i] + ': </strong>'+ cnic[i]+ '</p>';
+    }}
+    
+        
+    
+    })
+    
+    
+    
+    socket.on('showdel',(data)=>
+    {
+        if(cnic.length==1){
+            cnic.pop();name.pop();
+            entries.innerHTML = ' ';
+        
+        
+        }
+    
+    
+    else{
+    
+    
+        for(let i=0;i<=cnic.length;i++){
+            if( data.cnic==cnic[i])
+            {
+                cnic.splice(i,1);
+                name.splice(i,1);
+                break;
+            }
+        }
+    
+        for(let i=0 ;i<name.length;i++)
+    {
+         
+        if(i==0){ entries.innerHTML = '<p><strong>' + name[i] + ': </strong>'+ cnic[i]+ '</p>';}else{
+        entries.innerHTML += '<p><strong>' + name[i] + ': </strong>'+ cnic[i]+ '</p>';
+    }
+    
+    }
+    }
+    
+    })
+    
+        
+        
+        
+        
+        </script>
+
+    </body>
+    
+
+
+
+</html>
