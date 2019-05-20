@@ -8,7 +8,7 @@ This project takes and deletes data of a person and stores it in mongodb and als
 -------------------
 First run 
 
-1)npm init 
-2) node index.js
+ "npm init " then 
+ "node index.js"
 
 ----------------------
